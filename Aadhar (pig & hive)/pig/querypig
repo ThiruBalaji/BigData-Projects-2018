@@ -1,0 +1,42 @@
+
+
+aadhar = load '/aadhir' USING PigStorage(',') AS (state:chararray,city:chararray,approved:int,rejected:int);
+
+
+
+1. TOTAL NUMBER OF CARDS APPROVED BY STATE
+
+
+a = group aadhar by state;
+b= foreach a generate group, SUM(aadhar.approved);
+c = ORDER b by $1;
+ store c into '/aadh11';
+
+TOTAL NUMBER OF CARDS REJECTED BY STATES
+
+a = group aadhar by state;
+b = foreach a generate group, SUM(aadhar.rejected);
+c= ORDER b by $1;
+store c into '/aadh10';
+
+
+3.TOTAL NUMBER OF CARDS APPROVED BY CITY
+
+
+a = group aadhar by city;
+b = foreach a generate group, SUM(aadhar.approved);
+c = ORDER b by $1;
+store c into '/aadh9';
+
+
+4.Find out the total number of cards rejected by cities.
+
+
+a = group aadhar by city;
+b = foreach a generate group, SUM(aadhar.rejected);
+c= ORDER b by $1;
+store c into '/aadh5';
+
+
+
+

@@ -1,0 +1,22 @@
+create table crime12(STATE string,Crime_head string,Male_Below_18_Years string,Female_Below_18_Years string,Male_Between_18_30_Years string,Female_Between_18_30_Years string,Male_Between_30_45_Years string,Female_Between_30_45_Years string,Male_Between_45_60_Years string,Female_Between_45_60_Years string,Male_Above_60_Years string,Female_Above_60_Years string,Total_Male string,Total_Female string,Grand_Total string)
+
+row format delimited
+fields terminated by ','
+tblproperties("skip.header.line.count" = "1");
+
+load data local inpath 'crimeage2' into table crime12;
+
+insert overwrite directory '/crimedaw' select state,sum(Female_Between_18_30_Years) from crime12 group by state;
+
+xxxxxxxxxxxxxxxxxxxxxxxxx
+
+create table crime22(STATE string,CRIME_HEAD string,a int,n int,i int,r int,u int,d int,h int,b int,t int,l int,oint,g int)
+
+row format delimited fields terminated by ','
+tblproperties("skip.header.line.count" = "1");
+
+
+load data local inpath 'crimeyear1' into table crime22;
+
+insert overwrite directory '/crimedaw1' select state,sum(d) from crime22 group by state;
+

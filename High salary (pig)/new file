@@ -1,0 +1,9 @@
+A = LOAD '/datasets' USING PigStorage(',') AS (user:chararray, salary:int);
+b= filter A by salary == 1000;
+c = group b by user;
+ ae = foreach c generate COUNT(b.user);
+
+ as = foreach c generate SUM(b.salary);
+dump ae;
+
+

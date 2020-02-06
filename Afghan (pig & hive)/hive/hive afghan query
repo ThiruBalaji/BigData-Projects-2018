@@ -1,0 +1,2 @@
+insert overwrite directory '/hiveafghan' select type,region,count(type) as a from aff group by region,type having type='Explosive Hazard' order by a;   
+

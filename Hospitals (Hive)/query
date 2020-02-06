@@ -1,0 +1,21 @@
+Create table hospital1 (hospital_name string, question string, answer string, percent int)
+row format delimited fields terminated by ',';
+load data local inpath '/home/edureka/Desktop/health' into table hospital1;
+
+SELECT hospital_name, percent FROM hospital1 WHERE (question LIKE '%clean%') and
+(percent>60);
+
+SELECT MAX(percent) FROM hospital1 where question LIKE "%overall%";
+
+SELECT hospital_name,percent FROM hospital1 WHERE (question LIKE "%medicines%") and
+(percent >=60);
+
+
+ SELECT hospital_name, percent FROM hospital1 WHERE (question LIKE "%nurses%") and
+(percent >=60);
+
+insert overwrite directory '/healthcondition3' 
+ SELECT hospital_name, percent FROM hospital1 WHERE (question LIKE "%nurses%") and
+(percent >=60);
+
+

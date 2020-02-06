@@ -1,0 +1,22 @@
+Use case 1:
+
+
+
+1. Find the list of top 10 countries with highest medals?
+
+olympic = load '/olympic.csv' using PigStorage('\t');
+
+Country_final = foreach olympic generate $2 as Country, $9 as total_medals;
+
+grouped = group Country_final by Country;
+
+final_result = foreach grouped generate group, COUNT(Country_final.total_medals)as f_count;
+
+sort = order final_result by f_count desc;
+
+final_count = limit sort 10;
+
+--dump final_count;
+
+store final_count into '/olympic1';
+

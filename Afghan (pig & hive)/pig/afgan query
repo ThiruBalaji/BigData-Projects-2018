@@ -1,0 +1,13 @@
+A = LOAD '/afghan.csv' USING PigStorage(',') AS (type:chararray, category:chararray, region:chararray, attack:chararray);
+B = filter A by type == 'Explosive Hazard';
+C = group B by region;
+D = foreach C generate FLATTEN(group) as region, COUNT(B) as total;
+E = order D by total ASC;
+
+
+A = LOAD '/afghan.csv' USING PigStorage(',') AS (type:chararray, category:chararray, region:chararray, attack:chararray);
+B = filter A by category == 'IED Explosion';
+C = filter A by category == 'IED Found/Cleared';
+D = cogroup B by category , C by category;
+E = foreach D generate COUNT(B), COUNT(C);
+DUMP E;

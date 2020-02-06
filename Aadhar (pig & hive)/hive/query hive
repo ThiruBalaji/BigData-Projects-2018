@@ -1,0 +1,39 @@
+create table modi (state string,city string,approved int,rejected int)
+row format delimited
+fields terminated by ',';
+
+load data local inpath 'aadhir' into table modi;
+
+select state,sum(approved) from modi group by state;
+
+1111111111
+
+create table modi (state string,city string,approved int,rejected int)
+row format delimited
+fields terminated by ',';
+
+load data local inpath 'aadhir' into table modi;
+
+select state,sum(rejected) from modi group by state;
+
+11111111111111
+
+create table modi (state string,city string,approved int,rejected int)
+row format delimited
+fields terminated by ',';
+
+load data local inpath 'aadhir' into table modi;
+
+select city,sum(rejected) from modi group by city;
+
+1111111111
+
+create table modi (state string,city string,approved int,rejected int)
+row format delimited
+fields terminated by ',';
+
+load data local inpath 'aadhir' into table modi;
+
+select city,sum(approved) from modi group by city;
+
+

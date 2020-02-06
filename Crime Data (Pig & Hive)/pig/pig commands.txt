@@ -1,0 +1,16 @@
+Problem1:
+
+X = LOAD '/crimeyear1' using PigStorage (',');
+Y = FOREACH X GENERATE (chararray)$0 as state, (int)$7 as year;
+Z = GROUP Y BY state; 
+Data = FOREACH Z GENERATE group, SUM(X.year);
+STORE Data INTO '/crime6';  
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Problem2:
+
+X = LOAD '/crimeage2' using PigStorage (',');
+Y = FOREACH X generate (chararray)$0 as state, (int)$5 as age;
+Z = GROUP Y BY state; 
+Data = FOREACH Z GENERATE group, SUM(Y.age);
+STORE Data INTO '/crime3';
+----------------------------------------------------------------------------------------------------------------------------------------------------------

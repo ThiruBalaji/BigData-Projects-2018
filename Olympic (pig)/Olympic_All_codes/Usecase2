@@ -1,0 +1,17 @@
+
+
+2.Find the total number of medals won by India in each year
+
+olympic = load '/olympic.csv' using PigStorage('\t');
+
+Country_final = foreach olympic generate $2 as Country, $3 as Year, $9 as total_medals;
+
+Filtered = filter Country_final by Country == 'India';
+
+final_group = GROUP Filtered by Year;
+
+final_count = foreach final_group generate group, COUNT(Filtered);
+
+--dump final_count;
+
+store final_count into '/olympic2';

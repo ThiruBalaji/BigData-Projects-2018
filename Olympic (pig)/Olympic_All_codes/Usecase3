@@ -1,0 +1,16 @@
+
+3.Which countries have won the most number of medals in swimming?
+
+olympic = load '/olympic.csv' using PigStorage('\t');
+
+Country_final = foreach olympic generate $2 as Country, $5 as sport, $9 as total_medals;
+
+athletes_filter = FILTER Country_final by sport == 'Swimming';
+
+final_group = GROUP athletes_filter by Country;
+
+final_count = foreach final_group generate group, COUNT(athletes_filter) as f_count;
+
+sort = order final_count by f_count desc;
+
+store sort into '/Olympic3';
